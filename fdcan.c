@@ -634,23 +634,6 @@ static void odometry_Cal_Init(void)
     prev_right_pos = info_right.pos;
 }
 
-/*void warning_frame_handler(int id, u8 *data)
-{
-    ALARM_MSG msg_alarm;
-    static char node[20] = "motor_driver" static int32_t err_1, err_2, temp;
-    temp = data[1] << 8;
-    err_1 = temp + (data[0] << 8);
-    temp = data[3] << 8;
-    err_2 = temp + (data[2] << 8);
-    alarm_count++;
-    if (err_1 != 0 || err_2 != 0)
-    {
-        alarm_confirm = true;
-        msg_alarm.seq = alarm_count;
-        strcpy();
-    }
-}*/
-
 void connection_handler(void)
 {
     if (connection_check == true)
@@ -668,11 +651,12 @@ void connection_handler(void)
             connected = false; //CAN disconnec;
             if (connected == false)
             {
-                alarm_msg.seq = alarm_count;
-                alarm_msg.alarm_id = 3;
-                strcpy(alarm_msg.alarm_msg, "CAN DISCONNECTED");
-                strcpy(alarm_msg.node_id, "MOTOR");
-                alarm_msg.sensor_id = 3;
+                static ALARM_MSG alarm_con;
+                alarm_con.seq = alarm_count;
+                alarm_con.alarm_id = 3;
+                strcpy(alarm_con.alarm_msg, "CAN DISCONNECTED");
+                strcpy(alarm_con.node_id, "MOTOR");
+                alarm_con.sensor_id = 3;
                 connected = true;
                 printf("lose connection!\n\r");
             }
@@ -687,8 +671,6 @@ void warning_frame_handler(u32 id, u8 *rxdata)
     err_1 = temp + rxdata[0];
     temp = rxdata[3] << 8;
     err_2 = temp + rxdata[2];
-    static int count_error_1 = 0;
-    static int count_error_2 = 0;
 
     while (err_1)
     {
@@ -702,7 +684,8 @@ void warning_frame_handler(u32 id, u8 *rxdata)
             strcpy(alarm_err1.alarm_msg, warn_group1[warn_count]);
             strcpy(alarm_err1.node_id, "MOTOR");
             alarm_err1.sensor_id = 3;
-            printf("error is : %c\n\r", warn_group1[warn_count]);
+            printf("alarm_msg is: %s\n\r", alarm_err1.alarm_msg);
+            //here pub the struct alarm_err1;
         }
         warn_count++;
     }
@@ -721,24 +704,10 @@ void warning_frame_handler(u32 id, u8 *rxdata)
             strcpy(alarm_err2.alarm_msg, warn_group2[warn_count]);
             strcpy(alarm_err2.node_id, "MOTOR");
             alarm_err2.sensor_id = 3;
-            printf("error is : %c\n\r", warn_group2[warn_count]);
+            printf("alarm_msg is: %s\n\r", alarm_err2.alarm_msg);
+            //here pub the struct alarm_err2;
         }
         warn_count++;
-    }
-
-    if (id == 0x181)
-    {
-        if (err_1 != 0 || err_2 != 0)
-        {
-            printf("Motor_left is stalling\n\r");
-        }
-    }
-    if (id == 0x182)
-    {
-        if (err_1 != 0 || err_2 != 0)
-        {
-            printf("Motor_right is stalling\n\r");
-        }
     }
 }
 
@@ -802,14 +771,14 @@ void odometry_cal(int32_t pos_left, int32_t pos_right)
 
     dxy_ave = (dright + dleft) * 0.5f;
     dth = (dright - dleft) / WHEEL_INTERVAL;
-    vxy = dxy_ave * 100.0f; //dt; //小车线速度
+    vxy = dxy_ave / 0.02f; //dt; //小车线速度
 
     if (vxy >= 1.5f)
         vxy = 1.5f;
     if (vxy <= -1.5f)
         vxy = -1.5f;
 
-    vth = dth * 100.0f; //小车角速度
+    vth = dth / 0.02f; //小车角速度
 
     if (dxy_ave != 0)
     {
