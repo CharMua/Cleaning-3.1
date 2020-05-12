@@ -20,24 +20,24 @@ u8 FDCAN1_Mode_Init(u16 presc, u8 ntsjw, u16 ntsg1, u8 ntsg2, u32 mode)
     FDCAN1_Handler.Init.Mode = mode;                       //???????
     FDCAN1_Handler.Init.AutoRetransmission = DISABLE;      //??????????????????????????????
     FDCAN1_Handler.Init.TransmitPause = DISABLE;           //?????????
-    FDCAN1_Handler.Init.ProtocolException = DISABLE;       //???§¿????????
+    FDCAN1_Handler.Init.ProtocolException = DISABLE;       //???Ð­????????
     FDCAN1_Handler.Init.NominalPrescaler = presc;          //??????
     FDCAN1_Handler.Init.NominalSyncJumpWidth = ntsjw;      //??????????????
-    FDCAN1_Handler.Init.NominalTimeSeg1 = ntsg1;           //tsg1??¦¶:2~256
-    FDCAN1_Handler.Init.NominalTimeSeg2 = ntsg2;           //tsg2??¦¶:2~128
+    FDCAN1_Handler.Init.NominalTimeSeg1 = ntsg1;           //tsg1??Î§:2~256
+    FDCAN1_Handler.Init.NominalTimeSeg2 = ntsg2;           //tsg2??Î§:2~128
     FDCAN1_Handler.Init.MessageRAMOffset = 0;              //???RAM??? 0
     FDCAN1_Handler.Init.StdFiltersNbr = 4;                 //??????ID???????? 4
     FDCAN1_Handler.Init.ExtFiltersNbr = 0;                 //??????ID???????? 0
 
     FDCAN1_Handler.Init.RxFifo0ElmtsNbr = 1;                  //????FIFO0????? 1
-    FDCAN1_Handler.Init.RxFifo0ElmtSize = FDCAN_DATA_BYTES_8; //????FIFO0????§³??8???
+    FDCAN1_Handler.Init.RxFifo0ElmtSize = FDCAN_DATA_BYTES_8; //????FIFO0????Ð¡??8???
     FDCAN1_Handler.Init.RxBuffersNbr = 0;                     //????????? 0
 
     FDCAN1_Handler.Init.TxEventsNbr = 0;                           //?????????? 0
     FDCAN1_Handler.Init.TxBuffersNbr = 0;                          //????????? 0
     FDCAN1_Handler.Init.TxFifoQueueElmtsNbr = 1;                   //????FIFO????????? 1
     FDCAN1_Handler.Init.TxFifoQueueMode = FDCAN_TX_FIFO_OPERATION; //????FIFO??????
-    FDCAN1_Handler.Init.TxElmtSize = FDCAN_DATA_BYTES_8;           //?????§³:8???
+    FDCAN1_Handler.Init.TxElmtSize = FDCAN_DATA_BYTES_8;           //?????Ð¡:8???
     if (HAL_FDCAN_Init(&FDCAN1_Handler) != HAL_OK)
         return 1; //?????FDCAN
 
@@ -47,7 +47,7 @@ u8 FDCAN1_Mode_Init(u16 presc, u8 ntsjw, u16 ntsg1, u8 ntsg2, u32 mode)
     FDCAN1_RXFilter.FilterType = FDCAN_FILTER_MASK;         //?????????
     FDCAN1_RXFilter.FilterConfig = FDCAN_FILTER_TO_RXFIFO0; //??????0??????FIFO0
     FDCAN1_RXFilter.FilterID1 = 0x281;                      //TPDO2 cobe_id
-    FDCAN1_RXFilter.FilterID2 = 0x7ff;                      //???FDCAN?????????????????????32¦Ë????
+    FDCAN1_RXFilter.FilterID2 = 0x7ff;                      //???FDCAN?????????????????????32Î»????
     if (HAL_FDCAN_ConfigFilter(&FDCAN1_Handler, &FDCAN1_RXFilter) != HAL_OK)
         return 2;
 
@@ -56,7 +56,7 @@ u8 FDCAN1_Mode_Init(u16 presc, u8 ntsjw, u16 ntsg1, u8 ntsg2, u32 mode)
     FDCAN1_RXFilter1.FilterType = FDCAN_FILTER_MASK;         //?????????
     FDCAN1_RXFilter1.FilterConfig = FDCAN_FILTER_TO_RXFIFO0; //??????0??????FIFO0
     FDCAN1_RXFilter1.FilterID1 = 0x282;                      //TPDO2 cobe_id
-    FDCAN1_RXFilter1.FilterID2 = 0x7ff;                      //???FDCAN?????????????????????32¦Ë????
+    FDCAN1_RXFilter1.FilterID2 = 0x7ff;                      //???FDCAN?????????????????????32Î»????
     if (HAL_FDCAN_ConfigFilter(&FDCAN1_Handler, &FDCAN1_RXFilter1) != HAL_OK)
         return 3;
 
@@ -65,7 +65,7 @@ u8 FDCAN1_Mode_Init(u16 presc, u8 ntsjw, u16 ntsg1, u8 ntsg2, u32 mode)
     FDCAN1_RXFilter2.FilterType = FDCAN_FILTER_MASK;         //?????????
     FDCAN1_RXFilter2.FilterConfig = FDCAN_FILTER_TO_RXFIFO0; //??????0??????FIFO0
     FDCAN1_RXFilter2.FilterID1 = 0x181;                      //TPDO1 cobe_id
-    FDCAN1_RXFilter2.FilterID2 = 0x7ff;                      //???FDCAN?????????????????????32¦Ë????
+    FDCAN1_RXFilter2.FilterID2 = 0x7ff;                      //???FDCAN?????????????????????32Î»????
     if (HAL_FDCAN_ConfigFilter(&FDCAN1_Handler, &FDCAN1_RXFilter2) != HAL_OK)
         return 4;
 
@@ -74,7 +74,7 @@ u8 FDCAN1_Mode_Init(u16 presc, u8 ntsjw, u16 ntsg1, u8 ntsg2, u32 mode)
     FDCAN1_RXFilter4.FilterType = FDCAN_FILTER_MASK;         //?????????
     FDCAN1_RXFilter4.FilterConfig = FDCAN_FILTER_TO_RXFIFO0; //??????0??????FIFO0
     FDCAN1_RXFilter4.FilterID1 = 0x182;                      //TPDO1 cobe_id
-    FDCAN1_RXFilter4.FilterID2 = 0x7ff;                      //???FDCAN?????????????????????32¦Ë????
+    FDCAN1_RXFilter4.FilterID2 = 0x7ff;                      //???FDCAN?????????????????????32Î»????
     if (HAL_FDCAN_ConfigFilter(&FDCAN1_Handler, &FDCAN1_RXFilter4) != HAL_OK)
         return 5;
     HAL_FDCAN_ConfigGlobalFilter(&FDCAN1_Handler, FDCAN_REJECT, FDCAN_REJECT, DISABLE, DISABLE);
@@ -113,27 +113,27 @@ void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef *hfdcan)
 
 void HAL_FDCAN_MspDeInit(FDCAN_HandleTypeDef *hfdcan)
 {
-    __HAL_RCC_FDCAN_FORCE_RESET();   //??¦ËFDCAN1
-    __HAL_RCC_FDCAN_RELEASE_RESET(); //????¦Ë
+    __HAL_RCC_FDCAN_FORCE_RESET();   //??Î»FDCAN1
+    __HAL_RCC_FDCAN_RELEASE_RESET(); //????Î»
 
 #if FDCAN1_RX0_INT_ENABLE
     HAL_NVIC_DisableIRQ(FDCAN1_IT0_IRQn);
 #endif
 }
 
-/*UART_HandleTypeDef UART1_Handler; //UART¾ä±ú
+/*UART_HandleTypeDef UART1_Handler; //UARTå¥æŸ„
 
 void uart_init(u32 bound)
 {
-    //UART ³õÊ¼»¯ÉèÖÃ
+    //UART åˆå§‹åŒ–è®¾ç½®
     UART1_Handler.Instance = USART1;                    //USART1
-    UART1_Handler.Init.BaudRate = bound;                //²¨ÌØÂÊ
-    UART1_Handler.Init.WordLength = UART_WORDLENGTH_8B; //×Ö³¤Îª8Î»Êý¾Ý¸ñÊ½
-    UART1_Handler.Init.StopBits = UART_STOPBITS_1;      //Ò»¸öÍ£Ö¹Î»
-    UART1_Handler.Init.Parity = UART_PARITY_NONE;       //ÎÞÆæÅ¼Ð£ÑéÎ»
-    UART1_Handler.Init.HwFlowCtl = UART_HWCONTROL_NONE; //ÎÞÓ²¼þÁ÷¿Ø
-    UART1_Handler.Init.Mode = UART_MODE_TX_RX;          //ÊÕ·¢Ä£Ê½
-    HAL_UART_Init(&UART1_Handler);                      //HAL_UART_Init()»áÊ¹ÄÜUART1
+    UART1_Handler.Init.BaudRate = bound;                //æ³¢ç‰¹çŽ‡
+    UART1_Handler.Init.WordLength = UART_WORDLENGTH_8B; //å­—é•¿ä¸º8ä½æ•°æ®æ ¼å¼
+    UART1_Handler.Init.StopBits = UART_STOPBITS_1;      //ä¸€ä¸ªåœæ­¢ä½
+    UART1_Handler.Init.Parity = UART_PARITY_NONE;       //æ— å¥‡å¶æ ¡éªŒä½
+    UART1_Handler.Init.HwFlowCtl = UART_HWCONTROL_NONE; //æ— ç¡¬ä»¶æµæŽ§
+    UART1_Handler.Init.Mode = UART_MODE_TX_RX;          //æ”¶å‘æ¨¡å¼
+    HAL_UART_Init(&UART1_Handler);                      //HAL_UART_Init()ä¼šä½¿èƒ½UART1
 }
 
 int fputc(int ch, FILE *f)
@@ -144,12 +144,12 @@ int fputc(int ch, FILE *f)
 }*/
 u8 FDCAN1_Send_Msg(u8 *msg, u32 len)
 {
-    FDCAN1_TxHeader.Identifier = 0x601;             //32¦ËID
+    FDCAN1_TxHeader.Identifier = 0x601;             //32Î»ID
     FDCAN1_TxHeader.IdType = FDCAN_STANDARD_ID;     //???ID
     FDCAN1_TxHeader.TxFrameType = FDCAN_DATA_FRAME; //?????
     FDCAN1_TxHeader.DataLength = len;               //???????
     FDCAN1_TxHeader.ErrorStateIndicator = FDCAN_ESI_ACTIVE;
-    FDCAN1_TxHeader.BitRateSwitch = FDCAN_BRS_OFF;           //????????§Ý?
+    FDCAN1_TxHeader.BitRateSwitch = FDCAN_BRS_OFF;           //????????Ð»?
     FDCAN1_TxHeader.FDFormat = FDCAN_CLASSIC_CAN;            //?????CAN??
     FDCAN1_TxHeader.TxEventFifoControl = FDCAN_NO_TX_EVENTS; //????????
     FDCAN1_TxHeader.MessageMarker = 0;
@@ -161,12 +161,12 @@ u8 FDCAN1_Send_Msg(u8 *msg, u32 len)
 
 u8 MYFDCAN1_Send(u8 *msg, u32 len, u32 id)
 {
-    FDCAN1_TxHeader.Identifier = id;                //32¦ËID
+    FDCAN1_TxHeader.Identifier = id;                //32Î»ID
     FDCAN1_TxHeader.IdType = FDCAN_STANDARD_ID;     //???ID
     FDCAN1_TxHeader.TxFrameType = FDCAN_DATA_FRAME; //?????
     FDCAN1_TxHeader.DataLength = len;               //???????
     FDCAN1_TxHeader.ErrorStateIndicator = FDCAN_ESI_ACTIVE;
-    FDCAN1_TxHeader.BitRateSwitch = FDCAN_BRS_OFF;           //????????§Ý?
+    FDCAN1_TxHeader.BitRateSwitch = FDCAN_BRS_OFF;           //????????Ð»?
     FDCAN1_TxHeader.FDFormat = FDCAN_CLASSIC_CAN;            //?????CAN??
     FDCAN1_TxHeader.TxEventFifoControl = FDCAN_NO_TX_EVENTS; //????????
     FDCAN1_TxHeader.MessageMarker = 0;
@@ -207,7 +207,7 @@ void Set_TPDO1(void)
     static unsigned char msg_9[8] = {0x23, 0x00, 0x1A, 0x08, 0x00, 0x00, 0x00, 0x00};
     MYFDCAN1_Send(msg_9, FDCAN_DLC_BYTES_8, msg_id);
     delay_ms(5);
-    static unsigned char msg_10[8] = {0x23, 0x00, 0x1A, 0x00, 0x02, 0x00, 0x00, 0x00};
+    static unsigned char msg_10[8] = {0x2F, 0x00, 0x1A, 0x00, 0x02, 0x00, 0x00, 0x00};
     MYFDCAN1_Send(msg_10, FDCAN_DLC_BYTES_8, msg_id);
     delay_ms(5);
     static unsigned char msg_11[8] = {0x2F, 0x00, 0x18, 0x02, 0xFE, 0x00, 0x00, 0x00};
@@ -248,7 +248,7 @@ void Set_TPDO1(void)
     static unsigned char msg_22[8] = {0x23, 0x00, 0x1A, 0x08, 0x00, 0x00, 0x00, 0x00};
     MYFDCAN1_Send(msg_22, FDCAN_DLC_BYTES_8, msg_id);
     delay_ms(5);
-    static unsigned char msg_23[8] = {0x23, 0x00, 0x1A, 0x00, 0x02, 0x00, 0x00, 0x00};
+    static unsigned char msg_23[8] = {0x2F, 0x00, 0x1A, 0x00, 0x02, 0x00, 0x00, 0x00};
     MYFDCAN1_Send(msg_23, FDCAN_DLC_BYTES_8, msg_id);
     delay_ms(5);
     static unsigned char msg_24[8] = {0x2F, 0x00, 0x18, 0x02, 0xFE, 0x00, 0x00, 0x00};
@@ -302,7 +302,7 @@ void Set_TPDO2(void)
     static unsigned char msg_9[8] = {0x23, 0x01, 0x1A, 0x08, 0x00, 0x00, 0x00, 0x00};
     MYFDCAN1_Send(msg_9, FDCAN_DLC_BYTES_8, msg_id);
     delay_ms(5);
-    static unsigned char msg_10[8] = {0x23, 0x01, 0x1A, 0x00, 0x02, 0x00, 0x00, 0x00};
+    static unsigned char msg_10[8] = {0x2F, 0x01, 0x1A, 0x00, 0x02, 0x00, 0x00, 0x00};
     MYFDCAN1_Send(msg_10, FDCAN_DLC_BYTES_8, msg_id);
     delay_ms(5);
     static unsigned char msg_11[8] = {0x2F, 0x01, 0x18, 0x02, 0xFE, 0x00, 0x00, 0x00};
@@ -343,7 +343,7 @@ void Set_TPDO2(void)
     static unsigned char msg_22[8] = {0x23, 0x01, 0x1A, 0x08, 0x00, 0x00, 0x00, 0x00};
     MYFDCAN1_Send(msg_22, FDCAN_DLC_BYTES_8, msg_id);
     delay_ms(5);
-    static unsigned char msg_23[8] = {0x23, 0x01, 0x1A, 0x00, 0x02, 0x00, 0x00, 0x00};
+    static unsigned char msg_23[8] = {0x2F, 0x01, 0x1A, 0x00, 0x02, 0x00, 0x00, 0x00};
     MYFDCAN1_Send(msg_23, FDCAN_DLC_BYTES_8, msg_id);
     delay_ms(5);
     static unsigned char msg_24[8] = {0x2F, 0x01, 0x18, 0x02, 0xFE, 0x00, 0x00, 0x00};
@@ -771,14 +771,14 @@ void odometry_cal(int32_t pos_left, int32_t pos_right)
 
     dxy_ave = (dright + dleft) * 0.5f;
     dth = (dright - dleft) / WHEEL_INTERVAL;
-    vxy = dxy_ave / 0.02f; //dt; //Ð¡³µÏßËÙ¶È
+    vxy = dxy_ave / 0.02f; //dt; //å°è½¦çº¿é€Ÿåº¦
 
     if (vxy >= 1.5f)
         vxy = 1.5f;
     if (vxy <= -1.5f)
         vxy = -1.5f;
 
-    vth = dth / 0.02f; //Ð¡³µ½ÇËÙ¶È
+    vth = dth / 0.02f; //å°è½¦è§’é€Ÿåº¦
 
     if (dxy_ave != 0)
     {
@@ -816,7 +816,7 @@ void odometry_cal(int32_t pos_left, int32_t pos_right)
     }
 }
 
-//FDCAN1?§Ø??????
+//FDCAN1?Ð¶??????
 void FDCAN1_IT0_IRQHandler(void)
 {
     HAL_FDCAN_IRQHandler(&FDCAN1_Handler);
