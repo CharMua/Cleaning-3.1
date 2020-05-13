@@ -745,7 +745,27 @@ void odometry_cal(int32_t pos_left, int32_t pos_right)
     dt = dt_temp / 1000;
     //prev = now;
     told = tnow;
-
+    
+    dright_temp = info_right.pos - prev_right_pos;
+    if((dright_temp -(MAX_POSE/2.0)) > 1e-3)
+    {
+        dright_temp -= MAX_POSE;
+    }
+    if((dright_temp + (MAX_POSE/2.0))<=1e-3)
+    {
+        dright_temp +=MAX_POSE;
+    }
+    
+    dleft_temp = info_left.pos - prev_left_pos;
+    if((dleft_temp -(MAX_POSE/2.0)) > 1e-3)
+    {
+        dleft_temp -= MAX_POSE;
+    }
+    if((dleft_temp + (MAX_POSE/2.0))<=1e-3)
+    {
+        dleft_temp +=MAX_POSE;
+    }
+    
     if (info_right.pos - prev_right_pos < 0)
     {
         dright_temp = info_right.pos - prev_right_pos + ENCODER_RELOAD;
