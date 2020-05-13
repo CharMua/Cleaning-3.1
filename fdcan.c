@@ -552,7 +552,7 @@ void Speed_To_Can(u32 *speed)
     int32_t vel = 1e-3;
     id_1 = 0x201;
     id_2 = 0x202;
-    vel = speed[0] * KINCO_RPM_HEX;
+    vel = speed[0] * KINCO_RPM_HEX * DIR_LEFT;
     high = ((uint32_t)(vel)) / 65536;
     low = ((uint32_t)(vel)) % 65536;
     msg_1[0] = low % 256;
@@ -565,7 +565,7 @@ void Speed_To_Can(u32 *speed)
     msg_1[7] = 0x00;
     MYFDCAN1_Send(msg_1, FDCAN_DLC_BYTES_8, id_1);
     delay_ms(1);
-    vel = speed[1] * KINCO_RPM_HEX;
+    vel = speed[1] * KINCO_RPM_HEX * DIR_RIGHT;
     high = ((uint32_t)(vel)) / 65536;
     low = ((uint32_t)(vel)) % 65536;
     msg_2[0] = low % 256;
