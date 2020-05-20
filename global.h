@@ -24,7 +24,7 @@
 
 #define CONST_FRAME (WHEEL_DIAMETER * PI / (LINE_NUM * MULTIPLIER * DECELERATION_RATIO))
 
-#define MOTOR_PROCESS_LEFT  0x281
+#define MOTOR_PROCESS_LEFT 0x281
 #define MOTOR_PROCESS_RIGHT 0x282
 #define WARNING_FRAME_ONE 0x181
 #define WARNING_FRAME_TWO 0x182
@@ -34,34 +34,33 @@
 
 typedef struct
 {
-    int32_t speed;
-    int32_t pos;
+	int32_t speed;
+	int32_t pos;
 } MOTOR_INFO;
 
-
 typedef union {
-		 struct
-			{
-					float x;
-					float y;
-					float z;
-					float th;
-			} pose;
-			struct
-			{
-					float linear_x;
-					float linear_y;
-					float angualr_z;
-			} twist;
+	struct
+	{
+		float x;
+		float y;
+		float z;
+		float th;
+	} pose;
+	struct
+	{
+		float linear_x;
+		float linear_y;
+		float angualr_z;
+	} twist;
 } ODOMETRY;
 
 typedef struct
 {
-    u32 seq;
-    char node_id[30];
-    u32 sensor_id;
-    u32 alarm_id;
-    char alarm_msg[30];
+	u32 seq;
+	char node_id[4];
+	u32 sensor_id;
+	u32 alarm_type;
+	char alarm_msg[30];
 } ALARM_MSG;
 
 extern MOTOR_INFO info_left;
