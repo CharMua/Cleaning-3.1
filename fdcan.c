@@ -626,7 +626,14 @@ void msg_err_handler(u32 msg_id, int32_t err1, int32_t err2)
             alarm_err1.seq = alarm_count;
             strcpy(alarm_err1.alarm_msg, warn_group1[warn_count]);
             strcpy(alarm_err1.node_id, "120");
-            alarm_err1.sensor_id = (msg_id & 1);
+            if ((msg_id & 1) == 1)
+            {
+                strcpy(alarm_err1.sensor_id, "1");
+            }
+            else if ((msg_id & 1) == 2)
+            {
+                strcpy(alarm_err1.sensor_id, "1");
+            }
             alarm_err1.alarm_type = 12001002;
         }
         warn_count++;
@@ -645,7 +652,14 @@ void msg_err_handler(u32 msg_id, int32_t err1, int32_t err2)
             alarm_err2.seq = alarm_count;
             strcpy(alarm_err2.alarm_msg, warn_group2[warn_count]);
             strcpy(alarm_err2.node_id, "120");
-            alarm_err2.sensor_id = (msg_id & 1);
+            if ((msg_id & 1) == 1)
+            {
+                strcpy(alarm_err1.sensor_id, "1");
+            }
+            else if ((msg_id & 1) == 2)
+            {
+                strcpy(alarm_err1.sensor_id, "1");
+            }
             alarm_err1.alarm_type = 12001002;
         }
         warn_count++;

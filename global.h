@@ -58,7 +58,7 @@ typedef struct
 {
 	u32 seq;
 	char node_id[4];
-	u32 sensor_id;
+	char sensor_id[4];
 	u32 alarm_type;
 	char alarm_msg[30];
 } ALARM_MSG;
