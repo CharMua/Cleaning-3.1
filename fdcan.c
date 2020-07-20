@@ -3,7 +3,6 @@
 #include "FreeRTOS.h"
 #include "queue.h"
 
-
 extern QueueHandle_t CAN_Queue;
 
 FDCAN_HandleTypeDef FDCAN1_Handler;
@@ -15,7 +14,7 @@ u8 FDCAN1_Mode_Init(u16 presc, u8 ntsjw, u16 ntsg1, u8 ntsg2, u32 mode)
     FDCAN_FilterTypeDef FDCAN1_RXFilter;
     FDCAN_FilterTypeDef FDCAN1_RXFilter1;
     FDCAN_FilterTypeDef FDCAN1_RXFilter2;
-//    FDCAN_FilterTypeDef FDCAN1_RXFilter3;
+    //FDCAN_FilterTypeDef FDCAN1_RXFilter3;
     FDCAN_FilterTypeDef FDCAN1_RXFilter4;
 
     //?????FDCAN1
@@ -25,24 +24,24 @@ u8 FDCAN1_Mode_Init(u16 presc, u8 ntsjw, u16 ntsg1, u8 ntsg2, u32 mode)
     FDCAN1_Handler.Init.Mode = mode;                       //???????
     FDCAN1_Handler.Init.AutoRetransmission = DISABLE;      //??????????????????????????????
     FDCAN1_Handler.Init.TransmitPause = DISABLE;           //?????????
-    FDCAN1_Handler.Init.ProtocolException = DISABLE;       //???§¿????????
+    FDCAN1_Handler.Init.ProtocolException = DISABLE;       //???ï¿½ï¿½????????
     FDCAN1_Handler.Init.NominalPrescaler = presc;          //??????
     FDCAN1_Handler.Init.NominalSyncJumpWidth = ntsjw;      //??????????????
-    FDCAN1_Handler.Init.NominalTimeSeg1 = ntsg1;           //tsg1??¦¶:2~256
-    FDCAN1_Handler.Init.NominalTimeSeg2 = ntsg2;           //tsg2??¦¶:2~128
+    FDCAN1_Handler.Init.NominalTimeSeg1 = ntsg1;           //tsg1??ï¿½ï¿½:2~256
+    FDCAN1_Handler.Init.NominalTimeSeg2 = ntsg2;           //tsg2??ï¿½ï¿½:2~128
     FDCAN1_Handler.Init.MessageRAMOffset = 0;              //???RAM??? 0
     FDCAN1_Handler.Init.StdFiltersNbr = 4;                 //??????ID???????? 4
     FDCAN1_Handler.Init.ExtFiltersNbr = 0;                 //??????ID???????? 0
 
     FDCAN1_Handler.Init.RxFifo0ElmtsNbr = 1;                  //????FIFO0????? 1
-    FDCAN1_Handler.Init.RxFifo0ElmtSize = FDCAN_DATA_BYTES_8; //????FIFO0????§³??8???
+    FDCAN1_Handler.Init.RxFifo0ElmtSize = FDCAN_DATA_BYTES_8; //????FIFO0????ï¿½ï¿½??8???
     FDCAN1_Handler.Init.RxBuffersNbr = 0;                     //????????? 0
 
     FDCAN1_Handler.Init.TxEventsNbr = 0;                           //?????????? 0
     FDCAN1_Handler.Init.TxBuffersNbr = 0;                          //????????? 0
     FDCAN1_Handler.Init.TxFifoQueueElmtsNbr = 1;                   //????FIFO????????? 1
     FDCAN1_Handler.Init.TxFifoQueueMode = FDCAN_TX_FIFO_OPERATION; //????FIFO??????
-    FDCAN1_Handler.Init.TxElmtSize = FDCAN_DATA_BYTES_8;           //?????§³:8???
+    FDCAN1_Handler.Init.TxElmtSize = FDCAN_DATA_BYTES_8;           //?????ï¿½ï¿½:8???
     if (HAL_FDCAN_Init(&FDCAN1_Handler) != HAL_OK)
         return 1; //?????FDCAN
 
@@ -52,7 +51,7 @@ u8 FDCAN1_Mode_Init(u16 presc, u8 ntsjw, u16 ntsg1, u8 ntsg2, u32 mode)
     FDCAN1_RXFilter.FilterType = FDCAN_FILTER_MASK;         //?????????
     FDCAN1_RXFilter.FilterConfig = FDCAN_FILTER_TO_RXFIFO0; //??????0??????FIFO0
     FDCAN1_RXFilter.FilterID1 = 0x281;                      //TPDO2 cobe_id
-    FDCAN1_RXFilter.FilterID2 = 0x7ff;                      //???FDCAN?????????????????????32¦Ë????
+    FDCAN1_RXFilter.FilterID2 = 0x7ff;                      //???FDCAN?????????????????????32ï¿½ï¿½????
     if (HAL_FDCAN_ConfigFilter(&FDCAN1_Handler, &FDCAN1_RXFilter) != HAL_OK)
         return 2;
 
@@ -61,7 +60,7 @@ u8 FDCAN1_Mode_Init(u16 presc, u8 ntsjw, u16 ntsg1, u8 ntsg2, u32 mode)
     FDCAN1_RXFilter1.FilterType = FDCAN_FILTER_MASK;         //?????????
     FDCAN1_RXFilter1.FilterConfig = FDCAN_FILTER_TO_RXFIFO0; //??????0??????FIFO0
     FDCAN1_RXFilter1.FilterID1 = 0x282;                      //TPDO2 cobe_id
-    FDCAN1_RXFilter1.FilterID2 = 0x7ff;                      //???FDCAN?????????????????????32¦Ë????
+    FDCAN1_RXFilter1.FilterID2 = 0x7ff;                      //???FDCAN?????????????????????32ï¿½ï¿½????
     if (HAL_FDCAN_ConfigFilter(&FDCAN1_Handler, &FDCAN1_RXFilter1) != HAL_OK)
         return 3;
 
@@ -70,7 +69,7 @@ u8 FDCAN1_Mode_Init(u16 presc, u8 ntsjw, u16 ntsg1, u8 ntsg2, u32 mode)
     FDCAN1_RXFilter2.FilterType = FDCAN_FILTER_MASK;         //?????????
     FDCAN1_RXFilter2.FilterConfig = FDCAN_FILTER_TO_RXFIFO0; //??????0??????FIFO0
     FDCAN1_RXFilter2.FilterID1 = 0x181;                      //TPDO1 cobe_id
-    FDCAN1_RXFilter2.FilterID2 = 0x7ff;                      //???FDCAN?????????????????????32¦Ë????
+    FDCAN1_RXFilter2.FilterID2 = 0x7ff;                      //???FDCAN?????????????????????32ï¿½ï¿½????
     if (HAL_FDCAN_ConfigFilter(&FDCAN1_Handler, &FDCAN1_RXFilter2) != HAL_OK)
         return 4;
 
@@ -79,16 +78,16 @@ u8 FDCAN1_Mode_Init(u16 presc, u8 ntsjw, u16 ntsg1, u8 ntsg2, u32 mode)
     FDCAN1_RXFilter4.FilterType = FDCAN_FILTER_MASK;         //?????????
     FDCAN1_RXFilter4.FilterConfig = FDCAN_FILTER_TO_RXFIFO0; //??????0??????FIFO0
     FDCAN1_RXFilter4.FilterID1 = 0x182;                      //TPDO1 cobe_id
-    FDCAN1_RXFilter4.FilterID2 = 0x7ff;                      //???FDCAN?????????????????????32¦Ë????
+    FDCAN1_RXFilter4.FilterID2 = 0x7ff;                      //???FDCAN?????????????????????32ï¿½ï¿½????
     if (HAL_FDCAN_ConfigFilter(&FDCAN1_Handler, &FDCAN1_RXFilter4) != HAL_OK)
         return 5;
     HAL_FDCAN_ConfigGlobalFilter(&FDCAN1_Handler, FDCAN_REJECT, FDCAN_REJECT, DISABLE, DISABLE);
     /*RX filter to TPDO12*/
 
     HAL_FDCAN_Start(&FDCAN1_Handler);
-		delay_ms(100);
+    delay_ms(100);
     HAL_FDCAN_ActivateNotification(&FDCAN1_Handler, FDCAN_IT_RX_FIFO0_NEW_MESSAGE, 0);
-		delay_ms(100);		
+    delay_ms(100);
     return 0;
 }
 
@@ -120,8 +119,8 @@ void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef *hfdcan)
 
 void HAL_FDCAN_MspDeInit(FDCAN_HandleTypeDef *hfdcan)
 {
-    __HAL_RCC_FDCAN_FORCE_RESET();   //??¦ËFDCAN1
-    __HAL_RCC_FDCAN_RELEASE_RESET(); //????¦Ë
+    __HAL_RCC_FDCAN_FORCE_RESET();   //??ï¿½ï¿½FDCAN1
+    __HAL_RCC_FDCAN_RELEASE_RESET(); //????ï¿½ï¿½
 
 #if FDCAN1_RX0_INT_ENABLE
     HAL_NVIC_DisableIRQ(FDCAN1_IT0_IRQn);
@@ -130,12 +129,12 @@ void HAL_FDCAN_MspDeInit(FDCAN_HandleTypeDef *hfdcan)
 
 u8 FDCAN1_Send_Msg(u8 *msg, u32 len)
 {
-    FDCAN1_TxHeader.Identifier = 0x601;             //32¦ËID
+    FDCAN1_TxHeader.Identifier = 0x601;             //32ï¿½ï¿½ID
     FDCAN1_TxHeader.IdType = FDCAN_STANDARD_ID;     //???ID
     FDCAN1_TxHeader.TxFrameType = FDCAN_DATA_FRAME; //?????
     FDCAN1_TxHeader.DataLength = len;               //???????
     FDCAN1_TxHeader.ErrorStateIndicator = FDCAN_ESI_ACTIVE;
-    FDCAN1_TxHeader.BitRateSwitch = FDCAN_BRS_OFF;           //????????§Ý?
+    FDCAN1_TxHeader.BitRateSwitch = FDCAN_BRS_OFF;           //????????ï¿½ï¿½?
     FDCAN1_TxHeader.FDFormat = FDCAN_CLASSIC_CAN;            //?????CAN??
     FDCAN1_TxHeader.TxEventFifoControl = FDCAN_NO_TX_EVENTS; //????????
     FDCAN1_TxHeader.MessageMarker = 0;
@@ -152,7 +151,7 @@ u8 MYFDCAN1_Send(u8 *msg, u32 len, u32 id)
     FDCAN1_TxHeader.TxFrameType = FDCAN_DATA_FRAME; //?????
     FDCAN1_TxHeader.DataLength = len;               //???????
     FDCAN1_TxHeader.ErrorStateIndicator = FDCAN_ESI_ACTIVE;
-    FDCAN1_TxHeader.BitRateSwitch = FDCAN_BRS_OFF;           //????????§Ý?
+    FDCAN1_TxHeader.BitRateSwitch = FDCAN_BRS_OFF;           //????????ï¿½ï¿½?
     FDCAN1_TxHeader.FDFormat = FDCAN_CLASSIC_CAN;            //?????CAN??
     FDCAN1_TxHeader.TxEventFifoControl = FDCAN_NO_TX_EVENTS; //????????
     FDCAN1_TxHeader.MessageMarker = 0;
@@ -585,68 +584,14 @@ static void odometry_Cal_Init(void)
     prev_right_pos = info_right.pos;
 }
 
-void connection_handler(void)
-{
-    if (connection_check == true)
-    {
-        connection_check = false;
-        disconnect_cnt = 0;
-    }
-    else
-    {
-        disconnect_cnt++;
-        if (disconnect_cnt > 251)
-        {
-            alarm_count++;
-            disconnect_cnt = -251;
-            connected = false; //CAN disconnec;
-            if (connected == false)
-            {
-                alarm_msg.seq = alarm_count;
-                alarm_msg.alarm_id = 3;
-                strcpy(alarm_msg.alarm_msg, "CAN DISCONNECTED");
-                strcpy(alarm_msg.node_id, "MOTOR");
-                alarm_msg.sensor_id = 3;
-                connected = true;
-            }
-        }
-    }
-}
-
 void warning_frame_handler(u32 id, u8 *rxdata)
 {
-    static int32_t temp, err_1, err_2, cnt = 0, warn_count = 0;
+    static int32_t temp, err_1, err_2, warn_count = 0, cnt = 0;
+    char temp_id = (id == 0x181) ? '1' : '2';
     temp = rxdata[1] << 8;
     err_1 = temp + rxdata[0];
     temp = rxdata[3] << 8;
     err_2 = temp + rxdata[2];
-
-    if (id == 0x181)
-    {
-        if (err_1 != 0 || err_2 != 0)
-        {
-            alarm_count++;
-            static ALARM_MSG alarm_err1;
-            alarm_err1.seq = alarm_count;
-            strcpy(alarm_err1.alarm_msg, "Motor stalling");
-            strcpy(alarm_err1.node_id, "MOTOR");
-            alarm_err1.sensor_id = 3;
-           
-        }
-    }
-    if (id == 0x182)
-    {
-        if (err_1 != 0 || err_2 != 0)
-        {
-            alarm_count++;
-            static ALARM_MSG alarm_err2;
-            alarm_err2.seq = alarm_count;
-            strcpy(alarm_err2.alarm_msg, "Motor stalling");
-            strcpy(alarm_err2.node_id, "MOTOR");
-            alarm_err2.sensor_id = 3;
-          
-        }
-    }
 
     while (err_1)
     {
@@ -658,8 +603,9 @@ void warning_frame_handler(u32 id, u8 *rxdata)
             static ALARM_MSG alarm_err1;
             alarm_err1.seq = alarm_count;
             strcpy(alarm_err1.alarm_msg, warn_group1[warn_count]);
-            strcpy(alarm_err1.node_id, "MOTOR");
-            alarm_err1.sensor_id = 3;         
+            strcpy(alarm_err1.node_id, "120");
+            strcpy(alarm_err1.sensor_id, &temp_id);
+            strcpy(alarm_err1.alarm_id, "12001002");
         }
         warn_count++;
     }
@@ -676,17 +622,18 @@ void warning_frame_handler(u32 id, u8 *rxdata)
             static ALARM_MSG alarm_err2;
             alarm_err2.seq = alarm_count;
             strcpy(alarm_err2.alarm_msg, warn_group2[warn_count]);
-            strcpy(alarm_err2.node_id, "MOTOR");
-            alarm_err2.sensor_id = 3;         
+            strcpy(alarm_err2.node_id, "120");
+            strcpy(alarm_err2.sensor_id, &temp_id);
+            strcpy(alarm_err2.alarm_id, "12001002");
         }
         warn_count++;
     }
 }
 
-void odometry_cal(int32_t pos_left, int32_t pos_right,float *data)
+void odometry_cal(int32_t pos_left, int32_t pos_right, float *data)
 {
     static u32 dt_temp;
-    static float dxy_ave, dx, dy, dth,dt;
+    static float dxy_ave, dx, dy, dth, dt;
     static float dright, dleft;
     static int32_t dright_temp, dleft_temp;
     u32 reload = 10000;
@@ -713,25 +660,25 @@ void odometry_cal(int32_t pos_left, int32_t pos_right,float *data)
     }
     dt = dt_temp / 1000;
     told = tnow;
-		
-		dright_temp = info_right.pos - prev_right_pos;
-		if((dright_temp - (MAX_POSE/2.0)) > 1e-3)
-		{
-			dright_temp -= MAX_POSE;
-		}
-		if((dright_temp + (MAX_POSE/2.0)) <= 1e-3)
-		{
-			dright_temp += MAX_POSE + 1.0;
-		}
-		dleft_temp = (info_left.pos - prev_left_pos) * (-1);
-		if((dleft_temp - (MAX_POSE/2.0)) > 1e-3)
-		{
-			dleft_temp -= MAX_POSE;
-		}
-		if((dleft_temp + (MAX_POSE/2.0)) <= 1e-3)
-		{
-			dleft_temp += MAX_POSE + 1.0;
-		}
+
+    dright_temp = info_right.pos - prev_right_pos;
+    if ((dright_temp - (MAX_POSE / 2.0)) > 1e-3)
+    {
+        dright_temp -= MAX_POSE;
+    }
+    if ((dright_temp + (MAX_POSE / 2.0)) <= 1e-3)
+    {
+        dright_temp += MAX_POSE + 1.0;
+    }
+    dleft_temp = (info_left.pos - prev_left_pos) * (-1);
+    if ((dleft_temp - (MAX_POSE / 2.0)) > 1e-3)
+    {
+        dleft_temp -= MAX_POSE;
+    }
+    if ((dleft_temp + (MAX_POSE / 2.0)) <= 1e-3)
+    {
+        dleft_temp += MAX_POSE + 1.0;
+    }
 
     dright = ((float)dright_temp) * DISTANCE_PER_PULSE;
     dleft = ((float)dleft_temp) * DISTANCE_PER_PULSE;
@@ -740,20 +687,20 @@ void odometry_cal(int32_t pos_left, int32_t pos_right,float *data)
 
     dxy_ave = (dright + dleft) * 0.5f;
     dth = (dright - dleft) / WHEEL_INTERVAL;
-    vxy = dxy_ave / 0.01f; //dt; //Ð¡³µÏßËÙ¶È
+    vxy = dxy_ave / 0.01f; //dt; //Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
 
     if (vxy >= 1.5f)
         vxy = 1.5f;
     if (vxy <= -1.5f)
         vxy = -1.5f;
 
-    vth = dth / 0.01f; //Ð¡³µ½ÇËÙ¶È
-		th += dth;
-		ck_th = true;
+    vth = dth / 0.01f; //Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+    th += dth;
+    ck_th = true;
     if (dxy_ave != 0)
     {
         dx = cos(th) * dxy_ave;
-        dy = sin(th) * dxy_ave;//-
+        dy = sin(th) * dxy_ave; //-
         x += dx;
         y += dy;
         //x += (cos(th) * dx - sin(th) * dy);
@@ -768,8 +715,8 @@ void odometry_cal(int32_t pos_left, int32_t pos_right,float *data)
 		}*/
 
     if (ck_xy || ck_th)
-    {	
-/*			
+    {
+        /*			
         odom.pose.x = x;
         odom.pose.y = y;
         odom.pose.z = 0;
@@ -777,14 +724,14 @@ void odometry_cal(int32_t pos_left, int32_t pos_right,float *data)
         odom.twist.linear_x = vxy;
         odom.twist.linear_y = 0;
         odom.twist.angualr_z = vth;
-*/			
-			  data[0]=x;
-			  data[1]=y;
-			  data[2]=0;		
-			  data[3]=th;
-			  data[4]=vxy;	
-			  data[5]=0;
-			  data[6]=vth;	
+*/
+        data[0] = x;
+        data[1] = y;
+        data[2] = 0;
+        data[3] = th;
+        data[4] = vxy;
+        data[5] = 0;
+        data[6] = vth;
         ck_xy = false;
         ck_th = false;
     }
@@ -795,12 +742,11 @@ void FDCAN1_IT0_IRQHandler(void)
     HAL_FDCAN_IRQHandler(&FDCAN1_Handler);
 }
 
-
 void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 {
-	  BaseType_t xHigherPriorityTaskWoken;
+    BaseType_t xHigherPriorityTaskWoken;
     u8 rxdata[8];
-	  float can_data[7];
+    float can_data[7];
     int id, len;
 
     if ((RxFifo0ITs & FDCAN_IT_RX_FIFO0_NEW_MESSAGE) != RESET)
@@ -825,19 +771,20 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
             case WARNING_FRAME_ONE:
             case WARNING_FRAME_TWO:
                 warning_frame_handler(id, rxdata);
-								break;
+                break;
             default:
                 break;
             }
-        }			
+        }
         if (ck_lf && ck_rh)
         {
-            odometry_cal(info_left.pos, info_right.pos,can_data);	
-					  ck_lf = false;
+            odometry_cal(info_left.pos, info_right.pos, can_data);
+            ck_lf = false;
             ck_rh = false;
-			      xQueueSendFromISR(CAN_Queue,can_data,&xHigherPriorityTaskWoken);  //Ïò¶ÓÁÐÖÐ·¢ËÍÊý¾Ý  
-            portYIELD_FROM_ISR(xHigherPriorityTaskWoken);//Èç¹ûÐèÒªµÄ»°½øÐÐÒ»´ÎÈÎÎñÇÐ»»					
+            xQueueSendFromISR(CAN_Queue, can_data, &xHigherPriorityTaskWoken); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
         }
+        //				portYIELD_FROM_ISR(xHigherPriorityTaskWoken);//ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½
     }
 }
 
